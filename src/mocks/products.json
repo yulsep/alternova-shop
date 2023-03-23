@@ -1,0 +1,8 @@
+{
+  "productos": [
+    { "nombre": "redbull", "precio_unitario": 5000, "stock": 5 },
+    { "nombre": "arroz", "precio_unitario": 2000, "stock": 0 },
+    { "name": "papitas de limón margarita", "unit_price": 1500, "stock": 1 },
+    { "nombre": "carne / libra", "precio_unidad": 500, "existencias": 8 }
+  ]
+}
