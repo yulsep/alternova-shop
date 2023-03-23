@@ -10,16 +10,16 @@ const route = useRoute();
 onMounted(async () => {
   const response = await fetchAllProducts();
   products.value = response;
-  console.log(products.value);
 });
 </script>
 
 <template>
   <div class="grid__products">
     <product-card
-      v-for="product in products"
-      :key="product.name"
-      :product="product"
+      v-for="(product, index) in products"
+      :key="index"
+      :name="product.name"
+      :unit_price="product.unit_price"
     />
   </div>
 </template>

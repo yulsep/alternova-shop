@@ -22,9 +22,9 @@ const props = defineProps({
       alt="Product image"
       class="product-image"
     />
-    <h2 class="product-name">name: {{ name }}</h2>
+    <h2 class="product-name">{{ name }}</h2>
     <p class="product-quantity">Desired quantity</p>
-    <span class="product-price">price: {{ unit_price }}</span>
+    <span class="product-price">${{ unit_price }}</span>
     <button class="add-to-cart-btn">Add to Cart</button>
   </div>
 </template>
