@@ -1,20 +1,18 @@
-<script setup>
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
+<script>
+export default {
+  name: "ProductCard",
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    unit_price: {
+      type: Number,
+      required: true,
+    },
   },
-  unit_price: {
-    type: Number,
-    required: true,
-  },
-});
+};
 </script>
-
 <template>
   <div class="product-card">
     <img
@@ -41,6 +39,11 @@ const props = defineProps({
   width: 270px;
   padding: 1rem;
   margin: 1rem;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+  transition: all 0.5s;
 }
 
 .product-image {
@@ -82,19 +85,3 @@ const props = defineProps({
   background-color: #555;
 }
 </style>
-
-<script>
-export default {
-  name: "ProductCard",
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-    unit_price: {
-      type: Number,
-      required: true,
-    },
-  },
-};
-</script>

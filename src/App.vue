@@ -1,3 +1,30 @@
+<script>
+import { reactive } from "vue";
+
+export default {
+  setup() {
+    const CartState = reactive({
+      isCartHidden: true,
+    });
+
+    const toggleCart = () => {
+      CartState.isCartHidden = !CartState.isCartHidden;
+      const cartContainer = document.querySelector(".container-cart-products");
+      if (CartState.isCartHidden) {
+        cartContainer.classList.add("hidden-cart");
+      } else {
+        cartContainer.classList.remove("hidden-cart");
+      }
+    };
+
+    return {
+      toggleCart,
+      isCartHidden: CartState.isCartHidden,
+    };
+  },
+};
+</script>
+
 <template>
   <main class="main">
     <header class="header__shop">
@@ -9,63 +36,58 @@
         />
         <h2>&#128722;</h2>
       </div>
-      <div class="header__buttons">
-        <button class="fas fa-shopping-cart">Cart</button>
-        <button class="header__register-btn">Register</button>
+      <div class="container-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="icon-cart"
+          @click="toggleCart"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+          />
+        </svg>
+        <div class="count-products">
+          <span id="contador-productos">0</span>
+        </div>
+
+        <div
+          class="hidden-cart"
+          :class="{ 'container-cart-products': isCartHidden }"
+        >
+          <div class="cart-product">
+            <div class="info-cart-product">
+              <span class="amount__product-cart">1</span>
+              <p class="title__product-cart">Rice</p>
+              <span class="unit_price_cart">$2000</span>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="icon-close"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          <div class="cart-total">
+            <h3>Total:</h3>
+            <span class="total__topay">$2000</span>
+          </div>
+        </div>
       </div>
     </header>
     <router-view></router-view>
   </main>
 </template>
-
-<style>
-.main {
-  display: grid;
-  width: 100%;
-  height: 100%;
-}
-
-.header__shop-logo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.header__logo {
-  height: 2vh;
-}
-
-.header__shop {
-  width: 100%;
-  height: 8vh;
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-.header__buttons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-right: 2rem;
-}
-
-.header__register-btn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.header__register-btn:hover {
-  background-color: #555;
-}
-</style>
