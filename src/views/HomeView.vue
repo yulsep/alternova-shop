@@ -27,7 +27,7 @@ onMounted(async () => {
 <style scoped>
 .grid__products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 1rem;
   padding: 1rem;
   max-width: 1900px;

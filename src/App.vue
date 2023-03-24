@@ -60,26 +60,28 @@ export default {
           class="hidden-cart"
           :class="{ 'container-cart-products': isCartHidden }"
         >
-          <div class="cart-product">
-            <div class="info-cart-product">
-              <span class="amount__product-cart">1</span>
-              <p class="title__product-cart">Rice</p>
-              <span class="unit_price_cart">$2000</span>
+          <div class="row-product">
+            <div class="cart-product">
+              <div class="info-cart-product">
+                <span class="amount__product-cart">1</span>
+                <p class="title__product-cart">Papitas de limon Margarita</p>
+                <span class="unit_price_cart">$2000</span>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="icon-close"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
             </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="icon-close"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
           </div>
           <div class="cart-total">
             <h3>Total:</h3>

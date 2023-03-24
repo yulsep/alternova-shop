@@ -16,7 +16,7 @@ export default {
 <template>
   <div class="product-card">
     <img
-      src="https://via.placeholder.com/150"
+      src="https://imagenes.elpais.com/resizer/EbBrSmajk9TptLzmXKNAi8kkAz4=/1960x1470/cloudfront-eu-central-1.images.arcpublishing.com/prisa/P6BBCG2LF2FO4PQ3OU7CODKPUI.gif"
       alt="Product image"
       class="product-image"
     />
