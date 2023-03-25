@@ -1,17 +1,60 @@
-<script setup>
-import { onMounted, ref, computed } from "vue";
-import { useRoute } from "vue-router";
-import { fetchAllProducts } from "../services";
+<script>
 import productCard from "../components/ProductCard.vue";
 import Cart from "../components/Cart.vue";
+import { onMounted, ref } from "vue";
+import { fetchAllProducts } from "../services";
 
-const products = ref([]);
-const route = useRoute();
+export default {
+  components: {
+    productCard,
+    Cart,
+  },
 
-onMounted(async () => {
-  const response = await fetchAllProducts();
-  products.value = response;
-});
+  setup() {
+    const products = ref([]);
+    const cartItems = ref([]);
+
+    function addToCart(product) {
+      const itemIndex = cartItems.value.findIndex(
+        (item) => item.id === product.id
+      );
+      if (itemIndex > -1) {
+        cartItems.value[itemIndex].quantity++;
+      } else {
+        cartItems.value.push({
+          id: product.name,
+          name: product.name,
+          price: product.unit_price,
+          quantity: 1,
+        });
+      }
+    }
+
+    function removeFromCart(productId) {
+      const itemIndex = cartItems.value.findIndex(
+        (item) => item.id === productId
+      );
+      if (itemIndex > -1) {
+        if (cartItems.value[itemIndex].quantity > 1) {
+          cartItems.value[itemIndex].quantity--;
+        } else {
+          cartItems.value.splice(itemIndex, 1);
+        }
+      }
+    }
+    onMounted(async () => {
+      const response = await fetchAllProducts();
+      products.value = response;
+    });
+
+    return {
+      products,
+      cartItems,
+      addToCart,
+      removeFromCart,
+    };
+  },
+};
 </script>
 
 <template>
@@ -23,10 +66,9 @@ onMounted(async () => {
       :unit_price="product.unit_price"
       :stock="product.stock"
       :id="product.name"
-      @add-to-cart="addToCart"
-      @remove-from-cart="removeFromCart"
+      @add-to-cart="addToCart(product)"
     />
-    <cart />
+    <cart :items="cartItems" @remove-from-cart="removeFromCart" />
   </div>
 </template>
 

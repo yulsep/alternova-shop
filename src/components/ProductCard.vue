@@ -20,6 +20,7 @@ export default {
     },
   },
 
+  emits: ["add-to-cart", "remove-from-cart"],
   data() {
     return {
       hasStock: true,
@@ -31,7 +32,7 @@ export default {
       console.log(this.name);
       if (this.stock > 0) {
         this.$emit("add-to-cart", {
-          id: this.name,
+          product: this.value,
           name: this.name,
           unit_price: this.unit_price,
         });
