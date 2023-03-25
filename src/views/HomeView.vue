@@ -45,6 +45,7 @@ export default {
           this.cartItems.splice(itemIndex, 1);
         }
       }
+
       updateStock(product, -1);
     }
 

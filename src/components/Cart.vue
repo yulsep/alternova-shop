@@ -16,13 +16,16 @@ export default {
   methods: {
     addShoppingCart() {
       addToCart(this.cartItems, product);
+      console.log(this.cartItems);
     },
     /* addToCart(product) {
       addToCart(this.cartItems, product);
     }, */
     removeFromCart(product) {
       console.log(product);
-      const itemIndex = this.cartItems.findIndex((item) => item.id === product);
+      const itemIndex = this.cartItems.findIndex(
+        (item) => item.name === product.name
+      );
       if (itemIndex > -1) {
         if (this.cartItems[itemIndex].quantity > 1) {
           this.cartItems[itemIndex].quantity--;
@@ -30,7 +33,9 @@ export default {
           this.cartItems.splice(itemIndex, 1);
         }
       }
+      updateStock(product, -1);
     },
+
     getTotal() {
       return this.cartItems.reduce(
         (total, item) => total + item.price * item.quantity,
@@ -97,7 +102,7 @@ export default {
               <td>{{ item.quantity }}</td>
               <td>${{ item.price * item.quantity }}</td>
               <td>
-                <button class="button__remove" @click="removeFromCart(item.id)">
+                <button class="button__remove" @click="removeFromCart(item)">
                   X
                 </button>
               </td>
