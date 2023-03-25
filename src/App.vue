@@ -1,7 +1,15 @@
 <script>
 import { reactive } from "vue";
+import productCard from "./components/ProductCard.vue";
+import Cart from "./components/Cart.vue";
 
 export default {
+  name: "App",
+  components: {
+    productCard,
+    Cart,
+  },
+
   setup() {
     const CartState = reactive({
       isCartHidden: true,

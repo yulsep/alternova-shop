@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import { fetchAllProducts } from "../services";
 import productCard from "../components/ProductCard.vue";
+import Cart from "../components/Cart.vue";
 
 const products = ref([]);
 const route = useRoute();
@@ -20,7 +21,9 @@ onMounted(async () => {
       :key="index"
       :name="product.name"
       :unit_price="product.unit_price"
+      :stock="product.stock"
     />
+    <cart />
   </div>
 </template>
 
