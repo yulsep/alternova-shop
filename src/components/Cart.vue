@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { addToCart } from "../services";
+
 export default {
   props: {
     items: {
@@ -25,21 +27,7 @@ export default {
   },
   methods: {
     addToCart(product) {
-      const itemIndex = this.cartItems.findIndex(
-        (item) => item.id === product.id
-      );
-      console.log(item.id);
-      console.log(product.id);
-      if (itemIndex > -1) {
-        this.cartItems[itemIndex].quantity++;
-      } else {
-        this.cartItems.push({
-          id: product.id,
-          name: product.name,
-          price: product.unit_price,
-          quantity: 1,
-        });
-      }
+      addToCart(this.cartItems, product);
     },
     removeFromCart(productId) {
       const itemIndex = this.cartItems.findIndex(

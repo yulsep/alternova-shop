@@ -13,16 +13,15 @@ export default {
   setup() {
     const products = ref([]);
     const cartItems = ref([]);
+    console.log(cartItems);
 
     function addToCart(product) {
-      const itemIndex = cartItems.value.findIndex(
-        (item) => item.id === product.id
-      );
-      if (itemIndex > -1) {
-        cartItems.value[itemIndex].quantity++;
+      const cartItem = cartItems.value.find((item) => item.id === product.id);
+      if (cartItem) {
+        cartItem.quantity++;
       } else {
         cartItems.value.push({
-          id: product.name,
+          id: product.id,
           name: product.name,
           price: product.unit_price,
           quantity: 1,
@@ -60,8 +59,8 @@ export default {
 <template>
   <div class="grid__products">
     <product-card
-      v-for="(product, index) in products"
-      :key="index"
+      v-for="product in products"
+      :key="product.name"
       :name="product.name"
       :unit_price="product.unit_price"
       :stock="product.stock"

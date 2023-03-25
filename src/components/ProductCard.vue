@@ -1,4 +1,6 @@
 <script>
+import { addToCart } from "../services";
+
 export default {
   name: "ProductCard",
   props: {
@@ -29,14 +31,13 @@ export default {
 
   methods: {
     addToCart() {
-      console.log(this.name);
       if (this.stock > 0) {
         this.$emit("add-to-cart", {
-          product: this.value,
+          id: this.name,
           name: this.name,
           unit_price: this.unit_price,
+          stock: this.stock,
         });
-        this.stock--;
       } else {
         this.hasStock = false;
         setTimeout(() => {

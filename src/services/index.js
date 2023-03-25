@@ -1,3 +1,4 @@
 import { fetchAllProducts } from "./product.service";
+import { addToCart } from "./cart.service";
 
-export { fetchAllProducts } from "./product.service";
+export { fetchAllProducts, addToCart };
