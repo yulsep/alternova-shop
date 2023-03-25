@@ -22,6 +22,9 @@ onMounted(async () => {
       :name="product.name"
       :unit_price="product.unit_price"
       :stock="product.stock"
+      :id="product.name"
+      @add-to-cart="addToCart"
+      @remove-from-cart="removeFromCart"
     />
     <cart />
   </div>
