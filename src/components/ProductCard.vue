@@ -30,6 +30,7 @@ export default {
           name: this.name,
           unit_price: this.unit_price,
           stock: this.stock,
+          //TODO actualizar stock cada que doy click en agregar al carrito
         });
       } else {
         this.hasStock = false;

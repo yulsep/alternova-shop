@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard.vue";
 import Cart from "../components/Cart.vue";
 import { onMounted, ref } from "vue";
 import { fetchAllProducts } from "../services";
+import { addToCart } from "../services";
 
 export default {
   components: {
@@ -30,6 +31,7 @@ export default {
           quantity: 1,
         });
       }
+      updateStock(product, 1);
     }
 
     function removeFromCart(product) {
@@ -37,13 +39,24 @@ export default {
         (item) => item.name === product.name
       );
       if (itemIndex > -1) {
-        if (cartItems.value[itemIndex].quantity > 1) {
-          cartItems.value[itemIndex].quantity--;
+        if (this.cartItems[itemIndex].quantity > 1) {
+          this.cartItems[itemIndex].quantity--;
         } else {
-          cartItems.value.splice(itemIndex, 1);
+          this.cartItems.splice(itemIndex, 1);
         }
       }
+      updateStock(product, -1);
     }
+
+    function updateStock(product, quantity) {
+      const productIndex = products.value.findIndex(
+        (item) => item.name === product.name
+      );
+      if (productIndex > -1) {
+        products.value[productIndex].stock -= quantity;
+      }
+    }
+
     onMounted(async () => {
       const response = await fetchAllProducts();
       products.value = response;
@@ -54,6 +67,7 @@ export default {
       cartItems,
       addToCart,
       removeFromCart,
+      updateStock,
     };
   },
 };

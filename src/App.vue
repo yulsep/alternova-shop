@@ -70,11 +70,12 @@ export default {
         >
           <div class="row-product">
             <div class="cart-product">
-              <div class="info-cart-product">
+              <cart></cart>
+              <!--               <div class="info-cart-product">
                 <span class="amount__product-cart">1</span>
                 <p class="title__product-cart">Papitas de limon Margarita</p>
                 <span class="unit_price_cart">$2000</span>
-              </div>
+              </div> -->
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
