@@ -1,19 +1,3 @@
-<template>
-  <div>
-    <h2>Shopping Cart</h2>
-    <div v-if="cartItems.length === 0">Your cart is empty</div>
-    <div v-else>
-      <ul>
-        <li v-for="(item, index) in cartItems" :key="index">
-          {{ item.name }} - {{ item.quantity }} -
-          {{ item.price * item.quantity }}
-          <button @click="removeFromCart(item.id)">Remove</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
-
 <script>
 import { addToCart } from "../services";
 
@@ -53,3 +37,19 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div>
+    <h2>Shopping Cart</h2>
+    <div v-if="cartItems.length === 0">Your cart is empty</div>
+    <div v-else>
+      <ul>
+        <li v-for="(item, index) in cartItems" :key="index">
+          {{ item.name }} - {{ item.quantity }} -
+          {{ item.price * item.quantity }}
+          <button @click="removeFromCart(item.id)">Remove</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
