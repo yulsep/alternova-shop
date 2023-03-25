@@ -1,13 +1,7 @@
 <script>
-import { addToCart } from "../services";
-
 export default {
   name: "ProductCard",
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
     name: {
       type: String,
       required: true,
@@ -22,7 +16,7 @@ export default {
     },
   },
 
-  emits: ["add-to-cart", "remove-from-cart"],
+  emits: ["add-to-cart"],
   data() {
     return {
       hasStock: true,
@@ -33,7 +27,6 @@ export default {
     addToCart() {
       if (this.stock > 0) {
         this.$emit("add-to-cart", {
-          id: this.name,
           name: this.name,
           unit_price: this.unit_price,
           stock: this.stock,
@@ -58,7 +51,7 @@ export default {
     <h2 class="product-name">{{ name }}</h2>
     <p class="product-quantity">Stock -- {{ stock }}</p>
     <span class="product-price">Price/unit ${{ unit_price }}</span>
-    <button class="add-to-cart-btn" @click="addToCart">Add to Cart</button>
+    <button class="add-to-cart-btn" @click="addToCart()">Add to Cart</button>
     <div v-if="!hasStock" class="out-of-stock">Out of stock</div>
   </div>
 </template>

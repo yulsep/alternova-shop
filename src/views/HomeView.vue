@@ -3,7 +3,6 @@ import ProductCard from "../components/ProductCard.vue";
 import Cart from "../components/Cart.vue";
 import { onMounted, ref } from "vue";
 import { fetchAllProducts } from "../services";
-import { addToCart } from "../services";
 
 export default {
   components: {
@@ -16,8 +15,10 @@ export default {
     const cartItems = ref([]);
 
     function addToCart(product) {
+      console.log(product);
+      console.log(this.cartItems);
       const itemIndex = this.cartItems.findIndex(
-        (item) => item.id === product.id
+        (item) => item.name === product.name
       );
       if (itemIndex > -1) {
         this.cartItems[itemIndex].quantity++;
@@ -31,9 +32,9 @@ export default {
       }
     }
 
-    function removeFromCart(productId) {
-      const itemIndex = cartItems.value.findIndex(
-        (item) => item.id === productId
+    function removeFromCart(product) {
+      const itemIndex = this.cartItems.findIndex(
+        (item) => item.name === product.name
       );
       if (itemIndex > -1) {
         if (cartItems.value[itemIndex].quantity > 1) {
@@ -67,7 +68,7 @@ export default {
       :unit_price="product.unit_price"
       :stock="product.stock"
       :id="product.name"
-      @add-to-cart="addToCart"
+      @add-to-cart="addToCart(product)"
     />
     <cart :items="cartItems" @remove-from-cart="removeFromCart" />
   </div>
