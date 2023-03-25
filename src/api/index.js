@@ -1,5 +1,5 @@
 export const API = {
-  get: async function (url = "http://localhost:3000/products", params = {}) {
+  get: async function (url = "", params = {}) {
     try {
       const response = await fetch(url, {
         method: "GET",
