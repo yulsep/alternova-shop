@@ -12,16 +12,20 @@ export default {
   },
   data() {
     return {
-      cartItems: [...this.items],
+      cartItems: [],
       cartVisible: false,
     };
   },
+
   methods: {
-    /* addToCart(product) {
-      addToCart(this.cartItems, product);
-    }, */
     removeFromCart(product) {
-      console.log(product);
+      console.log("Este es el producto que voy a eliminar -->", product);
+      this.$emit("remove-from-cart", {
+        name: product.name,
+        unit_price: product.unit_price,
+        stock: product.stock,
+      });
+      /*       console.log(product);
       const itemIndex = this.cartItems.findIndex(
         (item) => item.name === product.name
       );
@@ -32,7 +36,7 @@ export default {
           this.cartItems.splice(itemIndex, 1);
         }
       }
-      this.updateStock(product, -1);
+      this.updateStock(product, -1); */
     },
 
     getTotal() {
@@ -80,8 +84,9 @@ export default {
   watch: {
     items: {
       handler(newVal) {
+        console.log("items updated: ", newVal);
         this.cartItems = [...newVal];
-        console.log("cartItems updated: ", this.cartItems);
+        console.log("CART ITEMS : ", this.cartItems);
       },
       deep: true,
     },

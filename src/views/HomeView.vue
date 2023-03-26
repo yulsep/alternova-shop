@@ -15,16 +15,24 @@ export default {
     const products = ref([]);
     const cartItems = ref([]);
 
+    function updateStock(product, quantity) {
+      const productIndex = products.value.findIndex(
+        (item) => item.name === product.name
+      );
+      if (productIndex > -1) {
+        products.value[productIndex].stock -= quantity;
+      }
+    }
+
     function addToCart(product) {
-      console.log(product);
-      console.log(this.cartItems);
-      const itemIndex = this.cartItems.findIndex(
+      console.log(cartItems.value.length);
+      const itemIndex = cartItems.value.findIndex(
         (item) => item.name === product.name
       );
       if (itemIndex > -1) {
-        this.cartItems[itemIndex].quantity++;
+        cartItems.value[itemIndex].quantity++;
       } else {
-        this.cartItems.push({
+        cartItems.value.push({
           id: product.id,
           name: product.name,
           price: product.unit_price,
@@ -35,27 +43,19 @@ export default {
     }
 
     function removeFromCart(product) {
-      const itemIndex = this.cartItems.findIndex(
+      console.log("Este es el producto que voy a eliminar -->", product);
+      const itemIndex = cartItems.value.findIndex(
         (item) => item.name === product.name
       );
       if (itemIndex > -1) {
-        if (this.cartItems[itemIndex].quantity > 1) {
-          this.cartItems[itemIndex].quantity--;
+        if (cartItems.value[itemIndex].quantity > 1) {
+          cartItems.value[itemIndex].quantity--;
         } else {
-          this.cartItems.splice(itemIndex, 1);
+          cartItems.value.splice(itemIndex, 1);
         }
       }
 
-      this.updateStock(product, -1);
-    }
-
-    function updateStock(product, quantity) {
-      const productIndex = products.value.findIndex(
-        (item) => item.name === product.name
-      );
-      if (productIndex > -1) {
-        products.value[productIndex].stock -= quantity;
-      }
+      updateStock(product, -1);
     }
 
     onMounted(async () => {
@@ -75,6 +75,11 @@ export default {
 </script>
 
 <template>
+  <cart
+    :items="cartItems"
+    :update-stock="updateStock"
+    @remove-from-cart="removeFromCart"
+  />
   <div class="grid__products">
     <product-card
       v-for="product in products"
@@ -84,11 +89,6 @@ export default {
       :stock="product.stock"
       :id="product.name"
       @add-to-cart="addToCart(product)"
-    />
-    <cart
-      :items="cartItems"
-      :update-stock="updateStock"
-      @remove-from-cart="removeFromCart.bind(this)"
     />
   </div>
 </template>
