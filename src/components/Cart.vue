@@ -5,6 +5,10 @@ export default {
       type: Array,
       default: [],
     },
+    updateStock: {
+      type: Function,
+      required: true,
+    },
   },
   data() {
     return {
@@ -27,7 +31,7 @@ export default {
           this.cartItems.splice(itemIndex, 1);
         }
       }
-      updateStock(product, -1);
+      this.updateStock(product, -1);
     },
 
     getTotal() {

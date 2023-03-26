@@ -45,7 +45,7 @@ export default {
         }
       }
 
-      updateStock(product, -1);
+      this.updateStock(product, -1);
     }
 
     function updateStock(product, quantity) {
@@ -84,7 +84,11 @@ export default {
       :id="product.name"
       @add-to-cart="addToCart(product)"
     />
-    <cart :items="cartItems" @remove-from-cart="removeFromCart" />
+    <cart
+      :items="cartItems"
+      :update-stock="updateStock"
+      @remove-from-cart="removeFromCart.bind(this)"
+    />
   </div>
 </template>
 
