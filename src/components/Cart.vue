@@ -189,6 +189,5 @@ th {
 
 h4 {
   display: flex;
-  justify-content: end;
 }
 </style>

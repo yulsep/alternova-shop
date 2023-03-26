@@ -24,6 +24,13 @@ html {
   height: 100%;
 }
 
+.title__shop {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 8vh;
+  text-align: center;
+}
+
 .header__shop-logo {
   display: flex;
   align-items: center;

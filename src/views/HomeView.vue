@@ -75,11 +75,6 @@ export default {
 </script>
 
 <template>
-  <cart
-    :items="cartItems"
-    :update-stock="updateStock"
-    @remove-from-cart="removeFromCart"
-  />
   <div class="grid__products">
     <product-card
       v-for="product in products"
@@ -91,6 +86,11 @@ export default {
       @add-to-cart="addToCart(product)"
     />
   </div>
+  <cart
+    :items="cartItems"
+    :update-stock="updateStock"
+    @remove-from-cart="removeFromCart"
+  />
 </template>
 
 <style scoped>
@@ -98,7 +98,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-gap: 1rem;
-  padding: 1rem;
+  padding: 1rem 0;
   max-width: 1900px;
   min-width: 300px;
   justify-items: center;
