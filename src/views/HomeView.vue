@@ -72,33 +72,48 @@ export default {
 </script>
 
 <template>
-  <div class="grid__products">
-    <product-card
-      v-for="product in products"
-      :key="product.name"
-      :name="product.name"
-      :unit_price="product.unit_price"
-      :stock="product.stock"
-      :id="product.name"
-      @add-to-cart="addToCart(product)"
+  <div class="grid__home">
+    <cart
+      :items="cartItems"
+      :update-stock="updateStock"
+      @remove-from-cart="removeFromCart"
     />
+    <div class="grid__products">
+      <product-card
+        v-for="product in products"
+        :key="product.name"
+        :name="product.name"
+        :unit_price="product.unit_price"
+        :stock="product.stock"
+        :id="product.name"
+        @add-to-cart="addToCart(product)"
+      />
+    </div>
   </div>
-  <cart
-    :items="cartItems"
-    :update-stock="updateStock"
-    @remove-from-cart="removeFromCart"
-  />
 </template>
 
 <style scoped>
-.grid__products {
+.grid__home {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  grid-gap: 1rem;
+  grid-template-columns: 1fr 2fr;
+  gap: 7rem;
   padding: 1rem 0;
   max-width: 1900px;
   min-width: 300px;
   justify-items: center;
   margin-top: 2rem;
+}
+.grid__products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid__home {
+    grid-template-columns: none;
+    gap: 1rem;
+  }
 }
 </style>

@@ -45,7 +45,6 @@ export default {
         <h2>&#128722;</h2>
       </div>
     </header>
-    <h1 class="title__shop">ALTERNOVA SHOP</h1>
     <router-view></router-view>
   </main>
 </template>

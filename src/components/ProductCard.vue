@@ -50,15 +50,21 @@ export default {
       alt="Product image"
       class="product-image"
     />
-    <h2 class="product-name">{{ name }}</h2>
-    <p class="product-quantity">Stock -- {{ stock }}</p>
-    <span class="product-price">Price/unit ${{ unit_price }}</span>
+    <div class="header__card">
+      <h2 class="product-name">{{ name }}</h2>
+      <p class="product-quantity">Stock {{ stock }}</p>
+    </div>
+    <span class="product-price">${{ unit_price }}</span>
     <button class="add-to-cart-btn" @click="addToCart()">Add to Cart</button>
     <div v-if="!hasStock" class="out-of-stock">Out of stock</div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.header__card {
+  display: flex;
+  justify-content: space-between;
+}
 .product-card {
   background-color: #fff;
   border-radius: 5px;
@@ -67,9 +73,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 270px;
   padding: 1rem;
-  margin: 1rem;
 }
 
 .product-card:hover img {
