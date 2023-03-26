@@ -1,26 +1,90 @@
-<script setup>
+<script>
+import ProductCard from "../components/ProductCard.vue";
+import Cart from "../components/Cart.vue";
 import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 import { fetchAllProducts } from "../services";
-import productCard from "../components/ProductCard.vue";
 
-const products = ref([]);
-const route = useRoute();
+export default {
+  components: {
+    ProductCard,
+    Cart,
+  },
 
-onMounted(async () => {
-  const response = await fetchAllProducts();
-  products.value = response;
-});
+  setup() {
+    const products = ref([]);
+    const cartItems = ref([]);
+
+    function addToCart(product) {
+      console.log(product);
+      console.log(this.cartItems);
+      const itemIndex = this.cartItems.findIndex(
+        (item) => item.name === product.name
+      );
+      if (itemIndex > -1) {
+        this.cartItems[itemIndex].quantity++;
+      } else {
+        this.cartItems.push({
+          id: product.id,
+          name: product.name,
+          price: product.unit_price,
+          quantity: 1,
+        });
+      }
+      updateStock(product, 1);
+    }
+
+    function removeFromCart(product) {
+      const itemIndex = this.cartItems.findIndex(
+        (item) => item.name === product.name
+      );
+      if (itemIndex > -1) {
+        if (this.cartItems[itemIndex].quantity > 1) {
+          this.cartItems[itemIndex].quantity--;
+        } else {
+          this.cartItems.splice(itemIndex, 1);
+        }
+      }
+
+      updateStock(product, -1);
+    }
+
+    function updateStock(product, quantity) {
+      const productIndex = products.value.findIndex(
+        (item) => item.name === product.name
+      );
+      if (productIndex > -1) {
+        products.value[productIndex].stock -= quantity;
+      }
+    }
+
+    onMounted(async () => {
+      const response = await fetchAllProducts();
+      products.value = response;
+    });
+
+    return {
+      products,
+      cartItems,
+      addToCart,
+      removeFromCart,
+      updateStock,
+    };
+  },
+};
 </script>
 
 <template>
   <div class="grid__products">
     <product-card
-      v-for="(product, index) in products"
-      :key="index"
+      v-for="product in products"
+      :key="product.name"
       :name="product.name"
       :unit_price="product.unit_price"
+      :stock="product.stock"
+      :id="product.name"
+      @add-to-cart="addToCart(product)"
     />
+    <cart :items="cartItems" @remove-from-cart="removeFromCart" />
   </div>
 </template>
 

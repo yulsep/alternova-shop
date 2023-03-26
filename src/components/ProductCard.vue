@@ -10,6 +10,34 @@ export default {
       type: Number,
       required: true,
     },
+    stock: {
+      type: Number,
+      required: true,
+    },
+  },
+
+  emits: ["add-to-cart"],
+  data() {
+    return {
+      hasStock: true,
+    };
+  },
+
+  methods: {
+    addToCart() {
+      if (this.stock > 0) {
+        this.$emit("add-to-cart", {
+          name: this.name,
+          unit_price: this.unit_price,
+          stock: this.stock,
+        });
+      } else {
+        this.hasStock = false;
+        setTimeout(() => {
+          this.hasStock = true;
+        }, 2000);
+      }
+    },
   },
 };
 </script>
@@ -21,9 +49,10 @@ export default {
       class="product-image"
     />
     <h2 class="product-name">{{ name }}</h2>
-    <p class="product-quantity">Desired quantity</p>
-    <span class="product-price">${{ unit_price }}</span>
-    <button class="add-to-cart-btn">Add to Cart</button>
+    <p class="product-quantity">Stock -- {{ stock }}</p>
+    <span class="product-price">Price/unit ${{ unit_price }}</span>
+    <button class="add-to-cart-btn" @click="addToCart()">Add to Cart</button>
+    <div v-if="!hasStock" class="out-of-stock">Out of stock</div>
   </div>
 </template>
 
@@ -79,6 +108,11 @@ export default {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.out-of-stock {
+  color: rgb(255, 0, 89);
+  font-weight: bold;
 }
 
 .add-to-cart-btn:hover {
