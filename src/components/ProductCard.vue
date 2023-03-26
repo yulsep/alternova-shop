@@ -1,4 +1,5 @@
 <script>
+import { ref } from "vue";
 export default {
   name: "ProductCard",
   props: {
@@ -17,27 +18,28 @@ export default {
   },
 
   emits: ["add-to-cart"],
-  data() {
-    return {
-      hasStock: true,
-    };
-  },
 
-  methods: {
-    addToCart() {
-      if (this.stock > 0) {
-        this.$emit("add-to-cart", {
-          name: this.name,
-          unit_price: this.unit_price,
-          stock: this.stock,
+  setup(props, ctx) {
+    const hasStock = ref(true);
+
+    function addToCart() {
+      if (props.stock > 0) {
+        ctx.emit("add-to-cart", {
+          name: props.name,
+          unit_price: props.unit_price,
+          stock: props.stock,
         });
       } else {
-        this.hasStock = false;
+        hasStock.value = false;
         setTimeout(() => {
-          this.hasStock = true;
+          hasStock.value = true;
         }, 2000);
       }
-    },
+    }
+    return {
+      addToCart,
+      hasStock,
+    };
   },
 };
 </script>
