@@ -101,7 +101,7 @@ export default {
   max-width: 1900px;
   min-width: 300px;
   justify-items: center;
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 .grid__products {
   display: grid;
