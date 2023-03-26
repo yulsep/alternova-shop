@@ -3,7 +3,6 @@ import ProductCard from "../components/ProductCard.vue";
 import Cart from "../components/Cart.vue";
 import { onMounted, ref } from "vue";
 import { fetchAllProducts } from "../services";
-import products from "../mocks/productsMock.json";
 
 export default {
   components: {
@@ -25,7 +24,6 @@ export default {
     }
 
     function addToCart(product) {
-      console.log(cartItems.value.length);
       const itemIndex = cartItems.value.findIndex(
         (item) => item.name === product.name
       );
@@ -43,7 +41,6 @@ export default {
     }
 
     function removeFromCart(product) {
-      console.log("Este es el producto que voy a eliminar -->", product);
       const itemIndex = cartItems.value.findIndex(
         (item) => item.name === product.name
       );

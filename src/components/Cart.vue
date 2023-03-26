@@ -1,4 +1,6 @@
 <script>
+import { watch, ref } from "vue";
+
 export default {
   props: {
     items: {
@@ -10,59 +12,42 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      cartItems: [],
-      cartVisible: false,
-    };
-  },
 
-  methods: {
-    removeFromCart(product) {
-      console.log("Este es el producto que voy a eliminar -->", product);
-      this.$emit("remove-from-cart", {
+  setup(props, ctx) {
+    const cartItems = ref([]);
+    const cartVisible = ref(false);
+
+    function removeFromCart(product) {
+      ctx.emit("remove-from-cart", {
         name: product.name,
         unit_price: product.unit_price,
         stock: product.stock,
       });
-      /*       console.log(product);
-      const itemIndex = this.cartItems.findIndex(
-        (item) => item.name === product.name
-      );
-      if (itemIndex > -1) {
-        if (this.cartItems[itemIndex].quantity > 1) {
-          this.cartItems[itemIndex].quantity--;
-        } else {
-          this.cartItems.splice(itemIndex, 1);
-        }
-      }
-      this.updateStock(product, -1); */
-    },
+    }
 
-    getTotal() {
-      return this.cartItems.reduce(
+    function getTotal() {
+      return cartItems.value.reduce(
         (total, item) => total + item.price * item.quantity,
         0
       );
-    },
+    }
 
-    getCartItemCount() {
-      return this.cartItems.reduce((total, item) => total + item.quantity, 0);
-    },
+    function getCartItemCount() {
+      return cartItems.value.reduce((total, item) => total + item.quantity, 0);
+    }
 
-    placeOrder() {
-      console.log("Order Placed");
+    function placeOrder() {
       const orderDetails = {
         products: [],
         totalPrice: 0,
       };
 
-      this.cartItems.forEach((item) => {
+      cartItems.forEach((item) => {
         const product = {
-          name: item.name,
-          quantity: item.quantity,
-          price: item.price,
-          total: item.quantity * item.price,
+          name: props.name,
+          quantity: props.quantity,
+          price: props.price,
+          total: props.quantity * item.price,
         };
         orderDetails.products.push(product);
         orderDetails.totalPrice += product.total;
@@ -78,18 +63,24 @@ export default {
       downloadLink.href = orderUrl;
       downloadLink.download = "order.json";
       downloadLink.click();
-    },
-  },
+    }
 
-  watch: {
-    items: {
-      handler(newVal) {
-        console.log("items updated: ", newVal);
-        this.cartItems = [...newVal];
-        console.log("CART ITEMS : ", this.cartItems);
+    watch(
+      props.items,
+      (newVal) => {
+        cartItems.value = [...newVal];
       },
-      deep: true,
-    },
+      { deep: true }
+    );
+
+    return {
+      cartItems,
+      cartVisible,
+      removeFromCart,
+      getTotal,
+      getCartItemCount,
+      placeOrder,
+    };
   },
 };
 </script>
