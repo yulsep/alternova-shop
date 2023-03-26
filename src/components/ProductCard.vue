@@ -116,6 +116,6 @@ export default {
 }
 
 .add-to-cart-btn:hover {
-  background-color: #555;
+  background-color: #e71e6e;
 }
 </style>
