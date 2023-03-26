@@ -3,7 +3,6 @@ import ProductCard from "../components/ProductCard.vue";
 import Cart from "../components/Cart.vue";
 import { onMounted, ref } from "vue";
 import { fetchAllProducts } from "../services";
-import { addToCart } from "../services";
 
 export default {
   components: {

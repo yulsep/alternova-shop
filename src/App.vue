@@ -99,6 +99,14 @@ export default {
         </div>
       </div>
     </header>
+    <!--     <div class="image__intro">
+      <img
+        src="https://dalstonsuperstore.com/wp-content/uploads/2012/10/Ridley.jpg"
+        alt="market illustration"
+        class="image__illustration"
+      />
+      <h2 class="title__shop">Alternova Shop</h2>
+    </div> -->
     <router-view></router-view>
   </main>
 </template>

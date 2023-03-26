@@ -1,6 +1,4 @@
 <script>
-import { addToCart } from "../services";
-
 export default {
   props: {
     items: {
@@ -14,10 +12,6 @@ export default {
     };
   },
   methods: {
-    addShoppingCart() {
-      addToCart(this.cartItems, product);
-      console.log(this.cartItems);
-    },
     /* addToCart(product) {
       addToCart(this.cartItems, product);
     }, */
@@ -74,8 +68,12 @@ export default {
   },
 
   watch: {
-    items(newVal) {
-      this.cartItems = [...newVal];
+    items: {
+      handler(newVal) {
+        this.cartItems = [...newVal];
+        console.log("cartItems updated: ", this.cartItems);
+      },
+      deep: true,
     },
   },
 };
