@@ -1,6 +1,62 @@
 [
-  { "name": "redbull", "unit_price": 5000, "stock": 5 },
-  { "name": "rice", "unit_price": 2000, "stock": 0 },
-  { "name": "papitas de limón margarita", "unit_price": 1500, "stock": 1 },
-  { "name": "meat / pound", "unit_price": 500, "stock": 8 }
+  {
+    "name": "Assassin's Creed Valhalla",
+    "unit_price": 60000,
+    "stock": 5,
+    "image_url": "https://image.api.playstation.com/vulcan/ap/rnd/202103/2216/1i3iZDTv6aoObJCKKvoZFAjv.png"
+  },
+  {
+    "name": "Halo 5: Guardians",
+    "unit_price": 50000,
+    "stock": 10,
+    "image_url": "https://m.media-amazon.com/images/I/81KcrDGGMxL._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "name": "Gears of War 4",
+    "unit_price": 45000,
+    "stock": 15,
+    "image_url": "https://cdn.atomix.vg/wp-content/uploads/2016/10/Gears-of-War-4-Review.png"
+  },
+  {
+    "name": "Forza Horizon 4",
+    "unit_price": 55000,
+    "stock": 8,
+    "image_url": "https://store-images.s-microsoft.com/image/apps.36093.14343301090572358.2000000000007864116.1feb0fed-abe9-4849-b638-8d7eca69cff4"
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "unit_price": 65000,
+    "stock": 3,
+    "image_url": "https://i.blogs.es/55428f/red-dead-pelis/1366_2000.jpeg"
+  },
+  {
+    "name": "Cyberpunk 2077",
+    "unit_price": 70000,
+    "stock": 2,
+    "image_url": "https://assets-prd.ignimgs.com/2020/07/16/cyberpunk-2077-button-fin-1594877291453.jpg"
+  },
+  {
+    "name": "Call of Duty: Black Ops Cold War",
+    "unit_price": 55000,
+    "stock": 10,
+    "image_url": "https://image.api.playstation.com/vulcan/ap/rnd/202112/0618/cFLNC3xYfEdDl7D1Wvu4MVb1.png"
+  },
+  {
+    "name": "FIFA 22",
+    "unit_price": 60000,
+    "stock": 7,
+    "image_url": "https://phantom-marca.unidadeditorial.es/e01ffc6a26707d8a93ce7039be9015a1/crop/0x0/888x500/resize/1320/f/jpg/assets/multimedia/imagenes/2021/09/23/16323947090350.jpg"
+  },
+  {
+    "name": "Madden NFL 22",
+    "unit_price": 55000,
+    "stock": 12,
+    "image_url": "https://images.igdb.com/igdb/image/upload/t_1080p/co3a7l.jpg"
+  },
+  {
+    "name": "NBA 2K22",
+    "unit_price": 55000,
+    "stock": 11,
+    "image_url": "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2021/09/06/61362a4c8cafd.jpeg"
+  }
 ]

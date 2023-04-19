@@ -86,6 +86,7 @@ export default {
         :unit_price="product.unit_price"
         :stock="product.stock"
         :id="product.name"
+        :image_url="product.image_url"
         @add-to-cart="addToCart(product)"
       />
     </div>
